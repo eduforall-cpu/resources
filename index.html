@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The 38th KOSETA Academic Forum Resources</title>
+    <!-- Tailwind CSS for Styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f8fafc;
+            scroll-behavior: smooth;
+        }
+        .en-font {
+            font-family: 'Poppins', sans-serif;
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #2563eb, #4f46e5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-bg {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80') center/cover;
+            opacity: 0.1;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <!-- Header Section -->
+    <header class="hero-bg text-white py-16 px-4 sm:px-6 lg:px-8 shadow-lg">
+        <div class="max-w-7xl mx-auto relative z-10 text-center">
+            <div class="inline-block px-4 py-1.5 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-200 text-sm font-medium mb-6">
+                ✨ The 38th KOSETA Academic Forum Resources
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 tracking-tight leading-tight">
+                Future of English Education<br>
+                <span class="text-blue-400">Archive & Resources</span>
+            </h1>
+            <p class="text-lg text-slate-300 max-w-2xl mx-auto mb-8 font-light">
+                선생님들의 수업 혁신을 위한 강연 및 사례 발표 자료를 공유합니다.<br>
+                AI 활용부터 세계시민교육까지, 미래 교육의 통찰을 만나보세요.
+            </p>
+            
+            <!-- Search Bar -->
+            <div class="max-w-xl mx-auto relative group">
+                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <i class="fas fa-search text-slate-400 group-focus-within:text-blue-500 transition-colors"></i>
+                </div>
+                <input type="text" id="searchInput" 
+                    class="block w-full pl-11 pr-4 py-4 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white/20 transition-all shadow-lg"
+                    placeholder="발표자 이름, 학교, 또는 주제를 검색해보세요...">
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        
+        <!-- Category Filters -->
+        <div class="flex flex-wrap justify-center gap-3 mb-12 sticky top-4 z-20 py-2" id="categoryFilters">
+            <button onclick="filterData('all')" class="filter-btn active px-5 py-2.5 rounded-full text-sm font-medium bg-blue-600 text-white shadow-md hover:bg-blue-700 transition-colors focus:outline-none ring-2 ring-offset-2 ring-blue-600">
+                🔍 전체 보기
+            </button>
+            <button onclick="filterData('Keynote')" class="filter-btn px-5 py-2.5 rounded-full text-sm font-medium bg-white text-slate-600 shadow-sm hover:bg-slate-50 hover:text-blue-600 transition-colors focus:outline-none border border-slate-200">
+                🎤 Keynote
+            </button>
+            <button onclick="filterData('AI')" class="filter-btn px-5 py-2.5 rounded-full text-sm font-medium bg-white text-slate-600 shadow-sm hover:bg-slate-50 hover:text-blue-600 transition-colors focus:outline-none border border-slate-200">
+                🤖 AI·디지털 혁신
+            </button>
+            <button onclick="filterData('Speaking')" class="filter-btn px-5 py-2.5 rounded-full text-sm font-medium bg-white text-slate-600 shadow-sm hover:bg-slate-50 hover:text-blue-600 transition-colors focus:outline-none border border-slate-200">
+                ✍️ 말하기·쓰기
+            </button>
+            <button onclick="filterData('Global')" class="filter-btn px-5 py-2.5 rounded-full text-sm font-medium bg-white text-slate-600 shadow-sm hover:bg-slate-50 hover:text-blue-600 transition-colors focus:outline-none border border-slate-200">
+                🌏 세계시민·비판적사고
+            </button>
+            <button onclick="filterData('Convergence')" class="filter-btn px-5 py-2.5 rounded-full text-sm font-medium bg-white text-slate-600 shadow-sm hover:bg-slate-50 hover:text-blue-600 transition-colors focus:outline-none border border-slate-200">
+                🧩 융합수업 설계
+            </button>
+        </div>
+
+        <!-- Content Grid -->
+        <div id="contentGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Cards will be injected here via JavaScript -->
+        </div>
+
+        <!-- No Results Message -->
+        <div id="noResults" class="hidden text-center py-20">
+            <div class="text-6xl mb-4">🤔</div>
+            <h3 class="text-xl font-bold text-slate-700 mb-2">검색 결과가 없습니다.</h3>
+            <p class="text-slate-500">다른 키워드로 검색하거나 필터를 '전체 보기'로 변경해보세요.</p>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-12 mt-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="mb-4 text-sm">본 자료집은 교원 연수 및 학술 공유 목적으로 제작되었습니다.</p>
+            <p class="text-xs text-slate-600">&copy; 2026 KOSETA ACADEMIC FORUM. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Data & Logic -->
+    <script>
+        // Data Structure
+        const sessions = [
+            // Keynote Speech
+            {
+                id: 1,
+                category: "Keynote",
+                categoryLabel: "Keynote Speech",
+                icon: "fa-microphone-lines",
+                color: "text-indigo-600",
+                bg: "bg-indigo-50",
+                name: "이장호 교수",
+                affiliation: "중앙대학교 사범대학 영어교육과",
+                title: "Empowering Secondary English teachers with GenAI: No-code approaches to developing English learning apps",
+                link: "https://eduforall-cpu.github.io/KNS1/"
+            },
+            {
+                id: 2,
+                category: "Keynote",
+                categoryLabel: "Keynote Speech",
+                icon: "fa-microphone-lines",
+                color: "text-indigo-600",
+                bg: "bg-indigo-50",
+                name: "이지영 교수",
+                affiliation: "육군사관학교 영어과",
+                title: "AI-Driven Readability Analysis of High School English Textbooks",
+                link: "https://eduforall-cpu.github.io/KNS2/"
+            },
+
+            // AI·디지털 기반 수업 혁신 SIG
+            {
+                id: 3,
+                category: "AI",
+                categoryLabel: "AI·디지털 기반 수업 혁신",
+                icon: "fa-robot",
+                color: "text-blue-600",
+                bg: "bg-blue-50",
+                name: "우어진 선생님",
+                affiliation: "대전 오정중학교",
+                title: "Beyond the Screen: Weaving AI into the Human Fabric of the English Language Classroom",
+                link: "https://eduforall-cpu.github.io/AIDX1/"
+            },
+            {
+                id: 4,
+                category: "AI",
+                categoryLabel: "AI·디지털 기반 수업 혁신",
+                icon: "fa-share-nodes",
+                color: "text-blue-600",
+                bg: "bg-blue-50",
+                name: "김학민 선생님",
+                affiliation: "충북 상당고등학교",
+                title: "Sharing Ideas in AI-Based Teaching and Learning Methods Development",
+                link: "https://eduforall-cpu.github.io/AIDX2/"
+            },
+            {
+                id: 5,
+                category: "AI",
+                categoryLabel: "AI·디지털 기반 수업 혁신",
+                icon: "fa-pen-ruler",
+                color: "text-blue-600",
+                bg: "bg-blue-50",
+                name: "박지혜 선생님",
+                affiliation: "인천 화도진중학교",
+                title: "Becoming a Future Competency Designer as an English Teacher using the ACT Framework",
+                link: "https://eduforall-cpu.github.io/AIDX3/"
+            },
+            {
+                id: 6,
+                category: "AI",
+                categoryLabel: "AI·디지털 기반 수업 혁신",
+                icon: "fa-chart-line",
+                color: "text-blue-600",
+                bg: "bg-blue-50",
+                name: "강건모 선생님",
+                affiliation: "제주 제주중앙여자중학교",
+                title: "Developing Competences through Assessment: Formative and Summative Assessment",
+                link: "https://eduforall-cpu.github.io/AIDX4/"
+            },
+
+            // 말하기·쓰기 교수법 재구성 SIG
+            {
+                id: 7,
+                category: "Speaking",
+                categoryLabel: "말하기·쓰기 교수법 재구성",
+                icon: "fa-comments",
+                color: "text-emerald-600",
+                bg: "bg-emerald-50",
+                name: "송종민 선생님",
+                affiliation: "경기 동탄국제고등학교",
+                title: "Beyond Rote Performance: Redesigning Speaking for Meaningful and Reflective Learning",
+                link: "https://eduforall-cpu.github.io/SWX1/"
+            },
+            {
+                id: 8,
+                category: "Speaking",
+                categoryLabel: "말하기·쓰기 교수법 재구성",
+                icon: "fa-pen-nib",
+                color: "text-emerald-600",
+                bg: "bg-emerald-50",
+                name: "배연진 선생님",
+                affiliation: "충남 탕정중학교",
+                title: "Fostering Writing Skills via Brisk Teaching in the EMI Classroom",
+                link: "https://eduforall-cpu.github.io/SWX2/"
+            },
+            {
+                id: 9,
+                category: "Speaking",
+                categoryLabel: "말하기·쓰기 교수법 재구성",
+                icon: "fa-brain",
+                color: "text-emerald-600",
+                bg: "bg-emerald-50",
+                name: "이루리 선생님",
+                affiliation: "전남 순천세빛중학교",
+                title: "Enhancing Writing and Thinking through Process-Based English Writing and SMILE Q",
+                link: "https://eduforall-cpu.github.io/SWX3/"
+            },
+            {
+                id: 10,
+                category: "Speaking",
+                categoryLabel: "말하기·쓰기 교수법 재구성",
+                icon: "fa-clipboard-check",
+                color: "text-emerald-600",
+                bg: "bg-emerald-50",
+                name: "석지혜 선생님",
+                affiliation: "대구 대명중학교",
+                title: "Bridging Learning and Assessment: ATL in the IB MYP Classroom",
+                link: "https://eduforall-cpu.github.io/SWX4/"
+            },
+
+            // 세계시민교육 및 비판적 사고 SIG
+            {
+                id: 11,
+                category: "Global",
+                categoryLabel: "세계시민교육 및 비판적 사고",
+                icon: "fa-earth-asia",
+                color: "text-orange-600",
+                bg: "bg-orange-50",
+                name: "조세은 선생님",
+                affiliation: "강원 원주여자고등학교",
+                title: "Connecting to the World through Blended International Exchange: Expanding English Classrooms beyond Language Learning",
+                link: "https://eduforall-cpu.github.io/GCED1/"
+            },
+            {
+                id: 12,
+                category: "Global",
+                categoryLabel: "세계시민교육 및 비판적 사고",
+                icon: "fa-scale-balanced",
+                color: "text-orange-600",
+                bg: "bg-orange-50",
+                name: "유선영 선생님",
+                affiliation: "경북 경북외국어고등학교",
+                title: "Beyond Language: Raising Ethical Awareness through Critical English Literacy",
+                link: "https://eduforall-cpu.github.io/GCED2/"
+            },
+            {
+                id: 13,
+                category: "Global",
+                categoryLabel: "세계시민교육 및 비판적 사고",
+                icon: "fa-book-open-reader",
+                color: "text-orange-600",
+                bg: "bg-orange-50",
+                name: "이현우 선생님",
+                affiliation: "경남 사파중학교",
+                title: "Local Stories, Global Language: Engaging Students in English Exploration",
+                link: "https://eduforall-cpu.github.io/GCED3/"
+            },
+
+            // 통합적 사고 및 융합 수업 설계 SIG
+            {
+                id: 14,
+                category: "Convergence",
+                categoryLabel: "통합적 사고 및 융합 수업",
+                icon: "fa-landmark",
+                color: "text-purple-600",
+                bg: "bg-purple-50",
+                name: "김혜수 선생님",
+                affiliation: "서울 동덕여자고등학교",
+                title: "When History Speaks: War, Memory, and Meaning Beyond Subtitles",
+                link: "https://eduforall-cpu.github.io/ID1/"
+            },
+            {
+                id: 15,
+                category: "Convergence",
+                categoryLabel: "통합적 사고 및 융합 수업",
+                icon: "fa-puzzle-piece",
+                color: "text-purple-600",
+                bg: "bg-purple-50",
+                name: "고창훈 선생님",
+                affiliation: "부산 금곡고등학교",
+                title: "Synthesizing Korean SAT with Meaningful Activities",
+                link: "https://eduforall-cpu.github.io/ID2/"
+            },
+            {
+                id: 16,
+                category: "Convergence",
+                categoryLabel: "통합적 사고 및 융합 수업",
+                icon: "fa-flask",
+                color: "text-purple-600",
+                bg: "bg-purple-50",
+                name: "김한나 선생님",
+                affiliation: "전북 전북외국어고등학교",
+                title: "Hybrid Learning Meets PBL: Creative English Projects on History",
+                link: "https://eduforall-cpu.github.io/ID3/"
+            },
+            {
+                id: 17,
+                category: "Convergence",
+                categoryLabel: "통합적 사고 및 융합 수업",
+                icon: "fa-laptop-file",
+                color: "text-purple-600",
+                bg: "bg-purple-50",
+                name: "정은미 선생님",
+                affiliation: "울산 상안중학교",
+                title: "The Transition of English Education: Embracing the Shift from Classic to Digital",
+                link: "https://eduforall-cpu.github.io/ID4/"
+            }
+        ];
+
+        const grid = document.getElementById('contentGrid');
+        const noResults = document.getElementById('noResults');
+        const searchInput = document.getElementById('searchInput');
+
+        // Render Function
+        function renderSessions(data) {
+            grid.innerHTML = '';
+            
+            if (data.length === 0) {
+                grid.classList.add('hidden');
+                noResults.classList.remove('hidden');
+                return;
+            }
+
+            grid.classList.remove('hidden');
+            noResults.classList.add('hidden');
+
+            data.forEach((session, index) => {
+                const card = document.createElement('div');
+                card.className = `bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden card-hover flex flex-col h-full fade-in`;
+                card.style.animationDelay = `${index * 50}ms`;
+
+                card.innerHTML = `
+                    <div class="p-6 flex-grow flex flex-col">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold ${session.bg} ${session.color}">
+                                <i class="fas ${session.icon} mr-2"></i> ${session.categoryLabel}
+                            </span>
+                        </div>
+                        
+                        <h3 class="en-font text-xl font-bold text-slate-800 mb-3 leading-snug line-clamp-3">
+                            ${session.title}
+                        </h3>
+
+                        <div class="mt-auto pt-4 border-t border-slate-100">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 font-bold text-sm">
+                                    ${session.name.charAt(0)}
+                                </div>
+                                <div>
+                                    <p class="text-sm font-bold text-slate-800">${session.name}</p>
+                                    <p class="text-xs text-slate-500 truncate max-w-[200px]">${session.affiliation}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="${session.link}" target="_blank" class="block bg-slate-50 p-4 text-center text-sm font-bold text-blue-600 hover:bg-blue-600 hover:text-white transition-colors border-t border-slate-100">
+                        자료 보기 <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Filtering Logic
+        function filterData(category) {
+            // Update Buttons UI
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => {
+                // Reset styles
+                btn.classList.remove('bg-blue-600', 'text-white', 'ring-2', 'ring-blue-600', 'ring-offset-2');
+                btn.classList.add('bg-white', 'text-slate-600', 'border', 'border-slate-200');
+                
+                // Highlight active
+                if (btn.getAttribute('onclick') === `filterData('${category}')`) {
+                    btn.classList.remove('bg-white', 'text-slate-600', 'border', 'border-slate-200');
+                    btn.classList.add('bg-blue-600', 'text-white', 'ring-2', 'ring-blue-600', 'ring-offset-2');
+                }
+            });
+
+            // Filter Data
+            const query = searchInput.value.toLowerCase();
+            const filtered = sessions.filter(item => {
+                const matchesCategory = category === 'all' || item.category === category;
+                const matchesSearch = item.title.toLowerCase().includes(query) || 
+                                      item.name.includes(query) || 
+                                      item.affiliation.includes(query);
+                return matchesCategory && matchesSearch;
+            });
+
+            renderSessions(filtered);
+        }
+
+        // Search Logic
+        searchInput.addEventListener('input', (e) => {
+            const activeBtn = document.querySelector('.filter-btn.bg-blue-600');
+            const activeCategory = activeBtn ? activeBtn.getAttribute('onclick').match(/'([^']+)'/)[1] : 'all';
+            filterData(activeCategory);
+        });
+
+        // Initial Render
+        renderSessions(sessions);
+
+    </script>
+</body>
+</html>
